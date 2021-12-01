@@ -5,5 +5,7 @@
     <artifactId>app-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>pruebas</artifactId>
+  <artifactId>app-web</artifactId>
+  <packaging>war</packaging>
+  <name>app web backoffice</name>
 </project>
