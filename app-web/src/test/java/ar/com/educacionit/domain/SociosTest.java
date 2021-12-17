@@ -1,6 +1,9 @@
 package ar.com.educacionit.domain;
 
-import ar.com.educacionit.dao.impl.SocioDaoImpl;
+import ar.com.educacionit.services.CategoriaService;
+import ar.com.educacionit.services.SociosService;
+import ar.com.educacionit.services.impl.CategoriaServiceImpl;
+import ar.com.educacionit.services.impl.SociosServiceImpl;
 
 public class SociosTest {
 
@@ -13,20 +16,12 @@ public class SociosTest {
 		String direccion  = "calle 13";
 		Long pais = 1l;//1=ARG/2=COL/3=BRA ETC ETC
 		
-		SocioDaoImpl socioImpl = new SocioDaoImpl();
+		SociosService service = new SociosServiceImpl();		
+		Socios socio = new Socios(nombre, apellido, email, direccion, pais);		
+		service.save(socio);
 		
-		Socios socio = socioImpl.create(new Socios(nombre, apellido, email, direccion, pais));
-		
-		System.out.println("se ha creado el socios id:" + socio.getId());
-		
-		Socios otroSocio = socioImpl.findById(5l);
-		
-		if(otroSocio != null) {			
-			System.out.println("se ha creado el socios id:" + otroSocio.getId());
-		}else {
-			System.out.println("se ha encotrado al socios:" + otroSocio);
-		}
-		
-		//usar el findAll()???
+		CategoriaService cservice = new CategoriaServiceImpl();		
+		Categorias categorias = new Categorias("televisore", "abc1234");		
+		cservice.save(categorias);
 	}
 }
