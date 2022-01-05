@@ -18,7 +18,7 @@ public class SociosTest {
 		
 		SociosService service = new SociosServiceImpl();		
 		Socios socio = new Socios(nombre, apellido, email, direccion, pais);		
-		service.save(socio);
+		service.save(socio);//ctrl+t
 		
 		CategoriaService cservice = new CategoriaServiceImpl();		
 		Categorias categorias = new Categorias("televisore", "abc1234");		

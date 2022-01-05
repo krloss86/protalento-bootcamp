@@ -1,11 +1,15 @@
 package ar.com.educacionit.domain;
 
-public class Categorias {
+public class Categorias implements Entity{
 
 	//atributos
 	private Long id;
 	private String descripcion;
 	private String codigo;
+	
+	public Categorias() {
+
+	}
 	
 	public Categorias(Long id, String descripcion, String codigo) {
 		this.id = id;

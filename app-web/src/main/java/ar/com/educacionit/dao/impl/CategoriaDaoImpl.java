@@ -3,11 +3,17 @@ package ar.com.educacionit.dao.impl;
 import ar.com.educacionit.dao.CategoriaDao;
 import ar.com.educacionit.domain.Categorias;
 
-public class CategoriaDaoImpl implements CategoriaDao {
+public class CategoriaDaoImpl extends JdbcDaoBase<Categorias> implements CategoriaDao {
 
+	public CategoriaDaoImpl() {
+		super("CATEGORIAS");
+	}
+	
+	/*
 	public Categorias getOne(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql  = "SELECT * FROM CATEGORIAS WHERE ID = " + id;
+		System.out.println("Ejecutando sql:" + sql);
+		return new Categorias(id, "categoria 1", "abc000");
 	}
 
 	public void delete(Long id) {
@@ -33,5 +39,5 @@ public class CategoriaDaoImpl implements CategoriaDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+*/
 }
