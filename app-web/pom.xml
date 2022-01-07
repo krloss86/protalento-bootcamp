@@ -8,4 +8,10 @@
   <artifactId>app-web</artifactId>
   <packaging>war</packaging>
   <name>app web backoffice</name>
+  
+  <properties>
+  	<maven.compiler.target>11</maven.compiler.target>
+  	<maven.compiler.source>11</maven.compiler.source>
+  </properties>
+  
 </project>
