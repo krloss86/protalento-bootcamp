@@ -1,5 +1,7 @@
 package ar.com.educacionit.domain;
 
+import java.util.List;
+
 import ar.com.educacionit.dao.impl.SocioDaoImpl;
 
 public class FindAllSociosTest {
@@ -9,7 +11,7 @@ public class FindAllSociosTest {
 		//creo la implementacion que me permite acceder a la db (CRUDl)
 		SocioDaoImpl socioImpl = new SocioDaoImpl();
 		
-		Socios[] vectorDeSociso = socioImpl.findAll();
+		List<Socios> vectorDeSociso = socioImpl.findAll();
 		
 		for(Socios socio : vectorDeSociso) {
 			System.out.println(socio);
