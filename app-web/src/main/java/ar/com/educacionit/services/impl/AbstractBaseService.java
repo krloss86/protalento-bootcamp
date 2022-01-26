@@ -53,6 +53,12 @@ public class AbstractBaseService<T> implements GenericService<T>{
 	}
 
 	public List<T> findAll() {
-		return genericDao.findAll();
+		try {
+			return genericDao.findAll();
+		} catch (GenericException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

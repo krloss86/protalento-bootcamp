@@ -8,6 +8,7 @@
   <modules>
   	<module>pruebas</module>
   	<module>app-web</module>
+  	<module>app-domain</module>
   </modules>
   
 </project>

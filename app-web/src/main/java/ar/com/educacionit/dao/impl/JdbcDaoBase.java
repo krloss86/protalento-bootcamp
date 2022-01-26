@@ -1,12 +1,17 @@
 package ar.com.educacionit.dao.impl;
 
 import java.lang.reflect.ParameterizedType;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import ar.com.educacionit.dao.GenericDao;
 import ar.com.educacionit.dao.exceptions.DuplicatedException;
 import ar.com.educacionit.dao.exceptions.GenericException;
+import ar.com.educacionit.dao.jdbc.AdministradorDeConexiones;
+import ar.com.educacionit.dao.jdbc.util.DTOUtils;
 import ar.com.educacionit.domain.Entity;
 
 /**
@@ -124,22 +129,26 @@ public abstract class JdbcDaoBase<T extends Entity> implements GenericDao<T>{
 	
 	public abstract String getUpdateSQL(T socios);
 
-	public List<T> findAll() {
-		String sql = "SELECT * FROM " + this.tabla;
-		System.out.println(sql);
-		//la informacion debe venir desde la db
+	public List<T> findAll() throws GenericException {
 		
-		//supongo que hay dos registros!!!
-		List<T> instances = new ArrayList<T>();
-		T instance;
-		try {
-			instance = this.clazz.getDeclaredConstructor().newInstance();
-			instance.setId(1L);
-			instances.add(instance);
-			instances.add(instance);			
-		} catch (Exception e) {
-			e.printStackTrace();
+		List<T> list = new ArrayList<>();
+		
+		String sql = "SELECT * FROM " + this.tabla;
+		
+		//connection
+		try (Connection con = AdministradorDeConexiones.obtenerConexion();) {
+
+			try (Statement st = con.createStatement()) {
+				
+				try (ResultSet res = st.executeQuery(sql)) {
+					
+					list = DTOUtils.populateDTOs(this.clazz, res);					
+				}
+			}
+		}catch (Exception e) {			
+			throw new GenericException("No se pudo consultar:" +sql, e);
 		}
-		return instances;
+		
+		return list;
 	}
 }
