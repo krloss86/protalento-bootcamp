@@ -8,12 +8,13 @@ import ar.com.educacionit.domain.Categorias;
 import ar.com.educacionit.domain.Socios;
 import ar.com.educacionit.services.CategoriaService;
 import ar.com.educacionit.services.SociosService;
+import ar.com.educacionit.services.exceptions.ServiceException;
 import ar.com.educacionit.services.impl.CategoriaServiceImpl;
 import ar.com.educacionit.services.impl.SociosServiceImpl;
 
 public class MainJDBC2 {
 
-	public static void main(String[] args) throws GenericException, SQLException {
+	public static void main(String[] args) throws GenericException, SQLException, ServiceException {
 		
 		CategoriaService cs = new CategoriaServiceImpl();		
 		List<Categorias> lista = cs.findAll();		

@@ -11,9 +11,9 @@ public interface GenericDao<T> {
 
 	public void delete(Long id) throws GenericException;
 
-	public T save(T entity) throws DuplicatedException;
+	public T save(T entity) throws DuplicatedException, GenericException;
 
-	public void update(T entity);
+	public void update(T entity) throws GenericException, DuplicatedException;
 
 	public List<T> findAll() throws GenericException;
 }

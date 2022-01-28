@@ -13,7 +13,7 @@ public class SociosTest {
 		String nombre = "JUAN";
 		String apellido = "PEREZ";
 		String dni = "123456789";
-		String email = "unmail@mail.com";
+		String email = "unmail6@mail.com";
 		String direccion  = "calle 13";
 		Long pais = 1l;//1=ARG/2=COL/3=BRA ETC ETC
 		
@@ -23,16 +23,16 @@ public class SociosTest {
 		
 		socio.setApellido("nuevo apellido");
 		socio.setNombre("nuevo nombre");
-		socio.setEmail("email@mail.com.ar");
 		
 		service.update(socio);
-		
+		/*
 		CategoriaService cservice = new CategoriaServiceImpl();		
-		Categorias categorias = new Categorias("televisore", "abc1234");		
+		Categorias categorias = new Categorias("televisore", "abc0",1l);		
 		cservice.save(categorias);
 		
-		categorias.setCodigo("100000");
+		categorias.setCodigo("0004");
 		categorias.setDescripcion("descripcion nueva");
 		cservice.update(categorias);
+		*/
 	}
 }

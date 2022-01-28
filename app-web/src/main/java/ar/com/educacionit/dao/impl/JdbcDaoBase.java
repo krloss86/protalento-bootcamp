@@ -2,7 +2,10 @@ package ar.com.educacionit.dao.impl;
 
 import java.lang.reflect.ParameterizedType;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,34 +41,51 @@ public abstract class JdbcDaoBase<T extends Entity> implements GenericDao<T>{
 			throw new GenericException("Id no informado");
 		}
 		
+		T entity = null;
+		
 		String sql  = "SELECT * FROM " + this.tabla+ " WHERE ID = " + id;
-		System.out.println("Ejecutando sql:" + sql);
-		T entity;
-		try {//lo vamos a ver la proxima clase
-			//entity = this.clazz.newInstance();
-			entity = this.clazz.getDeclaredConstructor().newInstance();
-			entity.setId(id);
-			
-			//cuando viene desde la db
-			//paises_id > setPaisesId(objeto)
-			
-			//tomar los metodos de this.clazz > Method[]
-			//para cada method > method.invoke(entity)
-			
-			//clase utilizaria que va a saber como tomar la instancia y como armar 
-			//los seteos de los atributos
-		} catch (Exception e) {
-			entity = null;
+		
+		//connection
+		try (Connection con = AdministradorDeConexiones.obtenerConexion();) {
+
+			try (Statement st = con.createStatement()) {
+				
+				try (ResultSet res = st.executeQuery(sql)) {
+					
+					List<T> list = DTOUtils.populateDTOs(this.clazz, res);
+
+					if(!list.isEmpty()) {
+						entity = list.get(0);								
+					}
+				}
+			}
+		}catch (Exception e) {			
+			throw new GenericException("No se pudo consultar:" +sql, e);
 		}
+		
 		return entity;
 	}
 
 	public void delete(Long id) throws GenericException{
-		String sql = "DELETE FROM "+ this.tabla + " WHERE id = " + id;
-		System.out.println(sql);
-		//execute 
-		//error de conexion!!!
 		
+		if(id == null) {
+			throw new GenericException("El id informado es NULL");
+		}
+		
+		String sql = "DELETE FROM "+ this.tabla + " WHERE id =? ";
+
+		//connection
+		try (Connection con = AdministradorDeConexiones.obtenerConexion();) {
+
+			try (PreparedStatement st = con.prepareStatement(sql)) {
+				
+				st.setLong(1, id);
+				
+				st.executeUpdate();
+			}
+		}catch (Exception e) {			
+			throw new GenericException("No se pudo eliminar:" +sql, e);
+		}
 	}
 
 	/*
@@ -112,23 +132,59 @@ public abstract class JdbcDaoBase<T extends Entity> implements GenericDao<T>{
 	}
 	*/
 	
-	public T save(T entity) throws DuplicatedException{
-		String sql = "INSERT INTO "+ this.tabla + this.getSaveSQL(entity);
-		System.out.println(sql);
-		entity.setId(12L);//db
+	public T save(T entity) throws DuplicatedException, GenericException {
+		
+		String sql = "INSERT INTO "+ this.tabla + this.getSaveSQL();
+		
+		try (Connection con = AdministradorDeConexiones.obtenerConexion();) {
+
+			try (PreparedStatement st = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+			
+				this.save(st, entity);//esto no graba nada, solo setea el los ? el tipo y dato
+				
+				st.execute();
+				
+				try (ResultSet res = st.getGeneratedKeys()) {
+					
+					if(res.next()) {
+						
+						Long lastGeneratedId = res.getLong(1);//aca esta el id
+						
+						entity.setId(lastGeneratedId);
+					}
+				}
+			}
+		}catch (Exception e) {			
+			throw new GenericException("No se pudo insertar:" +sql, e);
+		}
+		
 		return entity;
 	}	
 	
-	// los hijos estan obligados a implementarlos 
-	public abstract String getSaveSQL(T entity);
+	public void update(T entity) throws DuplicatedException, GenericException {
+		
+		// UPDATE TABLA SET CAMPO1 =?, CAMPO2=?, CAMPON=? WHERE ID = ?
+				
+		String sql = "UPDATE "+ this.tabla + " SET " + this.getUpdateSQL() + " WHERE id = " + entity.getId();
+		
+		try (Connection con = AdministradorDeConexiones.obtenerConexion();) {
 
-	public void update(T entity) {
-		String sql = "UPDATE "+ this.tabla + " SET " +getUpdateSQL(entity) + " WHERE id = " + entity.getId();
-		System.out.println(sql);
+			try (PreparedStatement st = con.prepareStatement(sql)) {
+			
+				this.update(st, entity);//esto no graba nada, solo setea el los ? el tipo y dato
+				
+				st.execute();
+			}
+		}catch (SQLException e) {
+			//analizar si hay duplicated
+			if(e instanceof SQLIntegrityConstraintViolationException) {
+				throw new DuplicatedException("No se ha podido actualizar " + sql, e);
+			}
+			//OJO VER MAS TIPOS SI ES NECESARIO
+			throw new GenericException("No se pudo actualizar:" +sql, e);
+		}
 	}
 	
-	public abstract String getUpdateSQL(T socios);
-
 	public List<T> findAll() throws GenericException {
 		
 		List<T> list = new ArrayList<>();
@@ -151,4 +207,11 @@ public abstract class JdbcDaoBase<T extends Entity> implements GenericDao<T>{
 		
 		return list;
 	}
+
+	protected abstract void save(PreparedStatement st, T entity) throws SQLException;
+	// los hijos estan obligados a implementarlos 
+	public abstract String getSaveSQL();
+	
+	protected abstract void update(PreparedStatement st, T entity) throws SQLException;
+	public abstract String getUpdateSQL();
 }

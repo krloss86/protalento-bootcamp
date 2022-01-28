@@ -1,5 +1,7 @@
 package ar.com.educacionit.domain;
 
+import java.util.Date;
+
 public class Socios implements Entity{
 
 	private Long id;
@@ -8,6 +10,7 @@ public class Socios implements Entity{
 	private String email;
 	private String direccion;
 	private Long paisesId;
+	private Date fechaAlta;
 	
 	public Socios() {
 		
@@ -20,6 +23,16 @@ public class Socios implements Entity{
 		this.email = email;
 		this.direccion = direccion;
 		this.paisesId = paisesId;
+	}
+	
+	public Socios(Long id, String nombre, String apellido, String email, String direccion, Long paisesId,Date fechaAlta) {
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+		this.direccion = direccion;
+		this.paisesId = paisesId;
+		this.fechaAlta = fechaAlta;
 	}
 
 	public Socios(String nombre, String apellido, String email, String direccion, Long paisesId) {
@@ -84,4 +97,14 @@ public class Socios implements Entity{
 		return "Socios [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email
 				+ ", direccion=" + direccion + ", paisesId=" + paisesId + "]";
 	}
+
+	public Date getFechaAlta() {
+		return fechaAlta;
+	}
+
+	public void setFechaAlta(Date fechaAlta) {
+		this.fechaAlta = fechaAlta;
+	}
+	
+	
 }

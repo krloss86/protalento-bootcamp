@@ -12,7 +12,7 @@ public interface GenericService<T> {
 	
 	public T save(T entity) throws ServiceException;
 	
-	public void update(T entity);
+	public void update(T entity) throws ServiceException;
 	
-	public List<T> findAll();
+	public List<T> findAll() throws ServiceException;
 }
