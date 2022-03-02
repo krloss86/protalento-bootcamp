@@ -42,6 +42,12 @@ public class Articulos {
 	//constructor
 	//alt+shift+s
 	
+	public Articulos(Long id, String titulo, Double precio) {
+		this.id = id;
+		this.titulo = titulo;
+		this.precio = precio;
+	}
+
 	public Double getPrecio() {
 		return this.precio;
 	}
