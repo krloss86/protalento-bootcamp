@@ -12,7 +12,7 @@ public class FileParserMain2 {
 
 	public static void main(String[] args) {
 
-		String path = "C:\\desarrollo\\articulos.csv";
+		String path = "./src/main/java/ar/com/educacionit/generic/articulos.csv";
 		
 		IParser<Collection<Articulos>> parser = new CSVFileParser(path);
 		
