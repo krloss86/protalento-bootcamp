@@ -2,7 +2,7 @@ package ar.com.educacionit.domain;
 
 import java.util.Date;
 
-public class Articulos {
+public class Articulos implements Entity{
 
 	private Long id;
 	private String titulo;
