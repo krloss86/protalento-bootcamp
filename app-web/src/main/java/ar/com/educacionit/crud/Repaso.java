@@ -46,7 +46,7 @@ public class Repaso {
 				//4 > id
 				Long id;
 				String titulo;				
-				Data data = new Data();
+				//Data data = new Data();
 				if(opcion == 1) {					
 					id = teclado.nextLong();
 					titulo = teclado.next();
