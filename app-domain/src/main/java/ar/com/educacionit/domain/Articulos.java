@@ -10,9 +10,9 @@ public class Articulos implements Entity{
 	private String codigo;
 	private Double precio;
 	private Long stock;//ctrl+f
-	private Long marcaId;
-	//private Marcas marca;
-	private Long categoriaId;
+	private Long marcasId;
+	private Marcas marca;
+	private Long categoriasId;//alf+shit+r
 	private Categorias categoria;
 	
 	//hacia la db
@@ -23,8 +23,8 @@ public class Articulos implements Entity{
 		this.codigo = codigo;
 		this.precio = precio;
 		this.stock = stock;
-		this.marcaId = marcaId;
-		this.categoriaId = categoriaId;
+		this.marcasId = marcaId;
+		this.categoriasId = categoriaId;
 	}
 
 	// desde la db
@@ -36,8 +36,8 @@ public class Articulos implements Entity{
 		this.codigo = codigo;
 		this.precio = precio;
 		this.stock = stock;
-		this.marcaId = marcaId;
-		this.categoriaId = categoriaId;
+		this.marcasId = marcaId;
+		this.categoriasId = categoriaId;
 	}
 	//constructor
 	//alt+shift+s
@@ -102,23 +102,38 @@ public class Articulos implements Entity{
 		this.stock = stock;
 	}
 
-	public Long getMarcaId() {
-		return marcaId;
+	public Long getMarcasId() {
+		return marcasId;
 	}
 
-	public void setMarcaId(Long marcaId) {
-		this.marcaId = marcaId;
+	public void setMarcasId(Long marcasId) {
+		this.marcasId = marcasId;
 	}
 
-	public Long getCategoriaId() {
-		return categoriaId;
+	public Marcas getMarca() {
+		return marca;
 	}
 
-	public void setCategoriaId(Long categoriaId) {
-		this.categoriaId = categoriaId;
+	public void setMarca(Marcas marca) {
+		this.marca = marca;
 	}
 
-	
+	public Long getCategoriasId() {
+		return categoriasId;
+	}
+
+	public void setCategoriasId(Long categoriasId) {
+		this.categoriasId = categoriasId;
+	}
+
+	public Categorias getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categorias categoria) {
+		this.categoria = categoria;
+	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -133,7 +148,7 @@ public class Articulos implements Entity{
 
 	public String toString() {
 		return "Articulo [id=" + id + ", titulo=" + titulo + ", fechaCreacion=" + fechaCreacion + ", codigo=" + codigo
-				+ ", precio=" + precio + ", stock=" + stock + ", marcaId=" + marcaId + ", categoriaId=" + categoriaId
+				+ ", precio=" + precio + ", stock=" + stock + ", marcaId=" + marcasId + ", categoriaId=" + categoriasId
 				+ "]";
 	}
 	
