@@ -5,8 +5,14 @@
   <artifactId>app-parent</artifactId>
   <packaging>pom</packaging>
   <name>primer artefacto creado con maven+eclipse+github</name>
+
+  <properties>
+  	<maven.compiler.target>11</maven.compiler.target>
+  	<maven.compiler.source>11</maven.compiler.source>
+  </properties>
+  
   <modules>
-  	<module>pruebas</module>
+<!--   	<module>pruebas</module> -->
   	<module>app-web</module>
   	<module>app-domain</module>
   </modules>

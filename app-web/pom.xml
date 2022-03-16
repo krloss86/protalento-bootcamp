@@ -9,11 +9,6 @@
   <packaging>war</packaging>
   <name>app web backoffice</name>
   
-  <properties>
-  	<maven.compiler.target>11</maven.compiler.target>
-  	<maven.compiler.source>11</maven.compiler.source>
-  </properties>
-  
   <!-- AGREGAR  -->
   <dependencies>
 	<!-- https://mvnrepository.com/artifact|/mysql/mysql-connector-java -->
@@ -60,4 +55,32 @@
 		<version>0.9.0</version>
 	</dependency>
   </dependencies>
+  
+  <build>
+		<finalName>app-web</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>com.heroku</groupId>
+									<artifactId>webapp-runner</artifactId>
+									<version>9.0.41.0</version>
+									<destFileName>webapp-runner.jar</destFileName>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>
