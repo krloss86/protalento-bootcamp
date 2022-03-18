@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+	
+	<!-- no se ve al usuario -->
+	<head>
+		<title>Clase41- html</title>
+		<meta charset="utf-8"/>
+	</head>
+	
+	<!-- es lo que ve el usaurio -->
+	<body>
+		<!-- etiquetas (esto es un comentario)-->
+		<!-- titulo principal -->
+		<h1>Titulo Principal </h1>
+		<h2>Titulo Principal </h2>
+		<h3>Titulo Principal </h3>
+		<h4>Titulo Principal </h4>
+		<h5>Titulo Principal </h5>
+		<h6>Titulo Principal </h6>
+		<hr>
+		<!-- parrafos -->
+		<p>Soy un parrafo</p>
+		<p>Soy un parrafo 2</p>
+		<hr>
+		<!-- listas ul ol-->
+		<ul>
+			<!-- list item -->
+			<li>soy el item 1</li>
+			<li>soy el item 2</li>
+			<li>soy el item 3</li>
+		</ul>
+		<hr>
+		<!-- lista ordenada -->
+		<ol>
+			<li>paso 1</li>
+			<li>paso 2</li>
+			<li>paso 3</li>
+		</ol>
+		<hr/>
+		<!-- elemento = etiqueta -->
+		<span>soy un span</span>
+		<span>soy otro span</span>
+		
+		<!-- div contenedor -->
+		<div>
+			<ul>
+				<li>son un item dentro de un div</li>
+			</ul>
+			<p>soy un parrafo dentro de el mismo div</p>
+		</div>
+		
+		<!-- negrita  -->
+		<b>Soy un texto en negrita</b>
+		<i>sou un texto it&aacute;lica</i>
+		
+		<!-- codigos de letras con acentos -->
+		<p>Acentos</p>
+		<ul>
+			<li>&aacute;</li>
+			<li>&eacute;</li>
+			<li>&iacute;</li>
+			<li>&oacute;</li>
+			<li>&uacute;</li>
+		</ul>
+		
+		<!-- mal ejemplo de uso de los elemento o etiquetas -->
+		<p>
+			<li>hola</li>
+		</p>
+		
+		<!-- tablas -->
+		<!-- atributos -->
+		<table border="1">
+			<!-- primer fila -->
+			<tr>
+				<td>primer celda</td>
+				<td>segunda celda</td>
+			</tr>
+			<!-- segunda fila -->
+			<tr>
+				<td>celda 1, fila2</td>
+				<td>celda 2, fila2</td>
+				<td>celda 3, fila2</td>
+			</tr>
+		</table>
+		
+		<!-- imagen -->
+		<img
+			height="25%"
+			width="25%"
+			alt="bart"
+			src="https://i.pinimg.com/474x/d9/71/d0/d971d0a27ce2fa992a995696b68573cc.jpg"
+		/>
+		<img src="<%=request.getContextPath()%>/img/Bart_Simpson.webp"/>
+		<img height="25%" width="25%"src="../img/Bart_Simpson.webp"/>
+		<hr>
+		<!-- formulario que envia datos a un servlet -->
+		<form action="../ListadoServlet" method="post">
+			<input type="submit">
+		</form>
+		<hr>
+		<!-- etiquetas de texto -->
+		<ul>
+			<li>&lt;b&gt;&quot;<b>texto en negrita</b>&quot; &lt;/b&gt;</li>
+			<li><mark>texto remarcado</mark></li>
+			<li><ins>subrayado</ins></li>
+			<li><small>texto pequeño</small></li>
+			<li><i>texto itálica</i></li>
+			<li><del>texto tachado</del></li>
+			<li><sup>texto superindice</sup></li>
+			<li><sub>texto subindice</sub></li>
+			<li><strong>texto fuerte</strong></li>
+		</ul>
+	</body>
+	
+</html>
