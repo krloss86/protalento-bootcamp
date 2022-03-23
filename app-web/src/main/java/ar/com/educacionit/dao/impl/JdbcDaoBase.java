@@ -16,6 +16,7 @@ import ar.com.educacionit.dao.exceptions.GenericException;
 import ar.com.educacionit.dao.jdbc.AdministradorDeConexiones;
 import ar.com.educacionit.dao.jdbc.util.DTOUtils;
 import ar.com.educacionit.domain.Entity;
+import ar.com.educacionit.domain.Socios;
 
 /**
  * Las T son entidades que repesentan tablas, por ende van a heredar de Entity
@@ -45,22 +46,10 @@ public abstract class JdbcDaoBase<T extends Entity> implements GenericDao<T>{
 		
 		String sql  = "SELECT * FROM " + this.tabla+ " WHERE ID = " + id;
 		
-		//connection
-		try (Connection con = AdministradorDeConexiones.obtenerConexion();) {
-
-			try (Statement st = con.createStatement()) {
-				
-				try (ResultSet res = st.executeQuery(sql)) {
-					
-					List<T> list = DTOUtils.populateDTOs(this.clazz, res);
-
-					if(!list.isEmpty()) {
-						entity = list.get(0);								
-					}
-				}
-			}
-		}catch (Exception e) {			
-			throw new GenericException("No se pudo consultar:" +sql, e);
+		List<T> list = this.findBySQL(sql);
+		
+		if(!list.isEmpty()) {
+			entity = list.get(0);
 		}
 		
 		return entity;
@@ -214,4 +203,25 @@ public abstract class JdbcDaoBase<T extends Entity> implements GenericDao<T>{
 	
 	protected abstract void update(PreparedStatement st, T entity) throws SQLException;
 	public abstract String getUpdateSQL();
+	
+	public List<T> findBySQL(String whereSQL) throws GenericException {
+		
+		List<T> entity = new ArrayList<>();
+
+		//connection
+		try (Connection con = AdministradorDeConexiones.obtenerConexion();) {
+
+			try (Statement st = con.createStatement()) {
+				
+				try (ResultSet res = st.executeQuery(whereSQL)) {
+					
+					 entity = DTOUtils.populateDTOs(this.clazz, res);
+				}
+			}
+		}catch (Exception e) {			
+			throw new GenericException("No se pudo consultar:" +whereSQL, e);
+		}
+		
+		return entity; 
+	}
 }

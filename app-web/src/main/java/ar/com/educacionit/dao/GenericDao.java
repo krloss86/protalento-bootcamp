@@ -16,4 +16,7 @@ public interface GenericDao<T> {
 	public void update(T entity) throws GenericException, DuplicatedException;
 
 	public List<T> findAll() throws GenericException;
+	
+	public List<T> findBySQL(String whereSQL) throws GenericException;
+	
 }

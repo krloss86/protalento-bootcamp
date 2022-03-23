@@ -34,22 +34,20 @@ public class LoginServlet extends HttpServlet{
 		Users user;
 		
 		try {
-			user = ls.getUserByUserName(usernameFromHtml);
+			user = ls.getUserByUserNameAndPassword(usernameFromHtml,passwordFromHtml);
 		
-			if(user != null) {
+			if(user == null) {
 				
-				//BCRYPT
-				BCrypt.Result result = BCrypt.verifyer()
-						.verify(passwordFromHtml.getBytes(), user.getPassword().getBytes());
-				
-				if(!result.verified) {
-					//login.jsp con algun mensaje de error
-					target = ViewEnums.LOGIN;
-				}
-			}else {
 				//login.jsp con algun mensaje de error
-				target = ViewEnums.LOGIN;
+				target = ViewEnums.LOGIN;				
+			}else {
+				//request
+				//req.setAttribute("usuario", user);
+				
+				//session
+				req.getSession().setAttribute("usuario", user);
 			}
+			
 		} catch (ServiceException e) {			
 			e.printStackTrace();
 			target = ViewEnums.ERROR_GENERAL;
