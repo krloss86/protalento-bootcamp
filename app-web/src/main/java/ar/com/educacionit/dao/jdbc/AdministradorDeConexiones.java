@@ -8,10 +8,10 @@ import ar.com.educacionit.dao.exceptions.GenericException;
 public class AdministradorDeConexiones {
 
 	public static Connection obtenerConexion() throws GenericException {
-		String url = "jdbc:mysql://127.0.0.1:3306/bootcamp_protalento?serverTimezone=UTC&userSSL=false";
-		String user = "root";
-		String password = "root";
-		String diverName  = "com.mysql.cj.jdbc.Driver";
+		String url = "jdbc:postgresql://ec2-52-204-196-4.compute-1.amazonaws.com:5432/danjnhikpeq89d";
+		String user = "odkhwdqqaduamk";
+		String password = "255c6115ed9e2860e9affbda5149a07e90560c1e3b530bf09c1f9a1e014db88a";
+		String diverName  = "org.postgresql.Driver";
 		
 		try {
 			//com.mysql.cj.jdbc.Driver.class.newInstance();
