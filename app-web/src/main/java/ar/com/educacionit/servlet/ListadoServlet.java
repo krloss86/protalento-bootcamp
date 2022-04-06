@@ -19,7 +19,7 @@ import ar.com.educacionit.services.impl.ArticulosServicesImpl;
  * consola, sino web
  *
  */
-@WebServlet("/ListadoServlet")
+@WebServlet("/controllers/ListadoServlet")
 public class ListadoServlet extends HttpServlet {
 
 	@Override	

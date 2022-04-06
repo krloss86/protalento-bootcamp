@@ -25,7 +25,7 @@
 					<h2>Nombre: <%=user.getSocio().getNombre()%> </h2>
 					<h3>Apellido: <%=user.getSocio().getApellido()%> </h3>
 					
-					<a href="<%=request.getContextPath()%>/BuscarProductosServlet">Ver Listado</a>
+					<a href="<%=request.getContextPath()%>/controllers/BuscarProductosServlet">Ver Listado</a>
 				</div>
 			</div>
 		</section>

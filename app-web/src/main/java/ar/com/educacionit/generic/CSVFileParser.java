@@ -5,19 +5,28 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
+
+import javax.servlet.http.Part;
 
 import ar.com.educacionit.domain.Articulos;
 
 public class CSVFileParser extends BaseFile implements IParser<Collection<Articulos>>{
+	
+	public CSVFileParser(Part filePart) {
+		super(filePart);
+	}
 	
 	public CSVFileParser(String path) {
 		super(path);
 	}
 
 	//implementar el metodo generico, PERO, dandole un tipo concreto 
-	public Collection<Articulos> parse() throws ParseException{
+	public Collection<Articulos> parseV2() throws ParseException{
 		
 		//lista vacia de articulos
 		Collection<Articulos> articulos = new ArrayList<>();
@@ -62,6 +71,68 @@ public class CSVFileParser extends BaseFile implements IParser<Collection<Articu
 			throw new ParseException(e.getMessage(),e);
 		}
 		
+		return articulos;
+	}
+	
+	public Collection<Articulos> parse() throws ParseException, IOException {
+		
+		InputStream is = null;
+		FileReader fileReader = null;
+		BufferedReader br = null;
+		
+		try {
+			//detectar si tiene path como String o Part
+			if(this.filePart != null) {
+				is = filePart.getInputStream();
+				br = new BufferedReader(new InputStreamReader(is));
+			}else {
+				File file = new File(super.getFilePath());
+				if(!file.exists()) {
+					throw new ParseException("No existe el archivo:" + super.getFilePath());
+				}			
+				fileReader = new FileReader(file);
+				br = new BufferedReader(fileReader);
+			}				
+		}finally {
+			if(br != null) {
+				br.close();
+			}
+		}
+		
+		//lista vacia de articulos
+		return this.buildArchivos(br);
+	}
+
+	private Collection<Articulos> buildArchivos(BufferedReader br) throws IOException {
+		Collection<Articulos> articulos = new ArrayList<Articulos>();
+
+		String lineaLeida = br.readLine();
+		
+		//vuelvo a leer para tomar los "registros"
+		lineaLeida = br.readLine();
+		
+		Date fechaCrecion = new Date();
+		while(lineaLeida != null) {
+			
+			String[] datos = lineaLeida.split(";"); 
+			String titulo = datos[0];// => titulo
+			String codigo = datos[1];// => titulo
+			String precio = datos[2];// => precio
+			String stock = datos[3];// => precio
+			String categoria = datos[4];// => precio
+			String marca = datos[5];// => precio
+		
+			//validador!!
+			//Validador.getValidar(Enum.paraArticulo).validate(datos);
+						
+			Articulos unArticulo = new Articulos(
+				titulo,fechaCrecion,codigo,Double.parseDouble(precio),Long.parseLong(stock),Long.parseLong(marca), Long.parseLong(categoria)
+			);
+			
+			articulos.add(unArticulo);
+			lineaLeida = br.readLine();
+		}
+				
 		return articulos;
 	}
 }

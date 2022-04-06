@@ -9,6 +9,8 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 
+import javax.servlet.http.Part;
+
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -21,6 +23,10 @@ public class XLSXFileParser extends BaseFile implements IParser<Collection<Artic
 
 	public XLSXFileParser(String path) {
 		super(path);
+	}
+	
+	public XLSXFileParser(Part filePart) {
+		super(filePart);
 	}
 
 	//implementar el metodo generico, PERO, dandole un tipo concreto 
