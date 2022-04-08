@@ -6,18 +6,22 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import ar.com.educacionit.web.enums.ViewEnums;
-import ar.com.educacionit.web.enums.ViewKeysEnum;
+import ar.com.educacionit.web.enums.Enumerable;
 
 public class BaseServlet extends HttpServlet {
 
-	protected void addAttribute(HttpServletRequest req, ViewKeysEnum key, Object value) {
+	protected void addAttribute(HttpServletRequest req, Enumerable key, Object value) {
 		req.setAttribute(key.getParam(), value);
 	}
+	
+	protected void addAttribute(HttpSession session, Enumerable key, Object value) {
+		session.setAttribute(key.getParam(), value);
+	}
 
-	public void redirect(ViewEnums target, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher(target.getView()).forward(req, resp);		
+	public void redirect(Enumerable target, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.getRequestDispatcher(target.getParam()).forward(req, resp);		
 	}
 
 }

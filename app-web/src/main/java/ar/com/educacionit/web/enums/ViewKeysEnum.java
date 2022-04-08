@@ -1,6 +1,6 @@
 package ar.com.educacionit.web.enums;
 
-public enum ViewKeysEnum {
+public enum ViewKeysEnum implements Enumerable {
 
 	USERNAME("username"),
 	PASSWORD("password"),
@@ -8,7 +8,10 @@ public enum ViewKeysEnum {
 	USUARIO_PASSWORD_INVALIDO("Usuario/Password incorrectos"),
 	USER("user"),
 	UPLOAD_FILE("uploadfile"),
-	UPLOAD_PREVIEW_KEY("upload_preview_key")
+	UPLOAD_PREVIEW_KEY("upload_preview_key"), 
+	ARTICULOS_FAILS("articulos_fails"),
+	ARTICULOS_OKS("articulos_oks"), 
+	FORMATO("formato")
 	;
 	
 	private final String param;

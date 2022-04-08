@@ -17,6 +17,7 @@ import ar.com.educacionit.generic.CSVFileParser;
 import ar.com.educacionit.generic.IParser;
 import ar.com.educacionit.generic.ParseException;
 import ar.com.educacionit.generic.XLSXFileParser;
+import ar.com.educacionit.web.enums.Enumerable;
 import ar.com.educacionit.web.enums.ViewEnums;
 import ar.com.educacionit.web.enums.ViewKeysEnum;
 
@@ -31,40 +32,48 @@ public class UploadServlet extends BaseServlet {
 		
 		ViewEnums target = ViewEnums.UPLOAD_PREVIEW;
 		
-		if(filePart.getSize() > 0) {
-			
-			String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-			
-			String ext = this.getExt(fileName);
-			
-			IParser<Collection<Articulos>> parser;
-			switch (ext) {
-			case "csv":
-				parser = new CSVFileParser(filePart);
-				break;
-			case "xls":
-				parser = new XLSXFileParser(ext);
-				break;				
-			default:
-				parser = null;
-				break;
-			}
-			
-			if(parser != null) {
-				try {
-					Collection<Articulos> articulos = parser.parse();
-					super.addAttribute(req, ViewKeysEnum.UPLOAD_PREVIEW_KEY, articulos);
-				} catch (ParseException e) {
-					super.addAttribute(req, ViewKeysEnum.ERROR_GENERAL, e.getMessage());
-					target = ViewEnums.UPLOAD;
-				}
-			}else {
-				target = ViewEnums.UPLOAD;
-				super.addAttribute(req, ViewKeysEnum.ERROR_GENERAL, "Formato no soportado");
-			}
-			
-			super.redirect(target, req,resp);
+		//validamos 
+		if(filePart == null | filePart.getSize() == 0) {
+			target = ViewEnums.UPLOAD;
+			addAttribute(req, ViewKeysEnum.ERROR_GENERAL, "Debe selecionar un archivo");
+			redirect(target, req, resp);
 		}
+		
+		String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+		
+		String ext = this.getExt(fileName);
+		
+		IParser<Collection<Articulos>> parser;
+		switch (ext) {
+		case "csv":
+			parser = new CSVFileParser(filePart);
+			break;
+		case "xls":
+			parser = new XLSXFileParser(ext);
+			break;				
+		default:
+			parser = null;
+			break;
+		}
+		
+		if(parser != null) {
+			try {
+				Collection<Articulos> articulos = parser.parse();
+				super.addAttribute(req.getSession(), ViewKeysEnum.UPLOAD_PREVIEW_KEY, articulos);
+			} catch (ParseException e) {
+				super.addAttribute(req, ViewKeysEnum.ERROR_GENERAL, e.getMessage());
+				target = ViewEnums.UPLOAD;
+			}
+		}else {
+			target = ViewEnums.UPLOAD;
+			super.addAttribute(req, ViewKeysEnum.ERROR_GENERAL, "Formato no soportado");
+		}
+		
+		req.getSession().setAttribute(Enumerable.ENUMPARAM, ViewKeysEnum.UPLOAD_PREVIEW_KEY);
+		super.redirect(target, req,resp);
+		
+		//me falta una redirect
+		
 	}
 
 	private String getExt(String fileName) {
