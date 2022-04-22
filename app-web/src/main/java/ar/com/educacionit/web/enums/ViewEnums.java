@@ -8,7 +8,8 @@ public enum ViewEnums implements Enumerable{
 	ERROR_GENERAL("/errorGeneral.jsp"), 
 	UPLOAD_PREVIEW("/preview.jsp"), 
 	UPLOAD("/upload.jsp"), 
-	RESULTADO_PREVIEW("/resultadoPreview.jsp");
+	RESULTADO_PREVIEW("/resultadoPreview.jsp"), 
+	LISTADO_GENERAL("/listadoGeneral.jsp");
 	
 	private String view;
 	

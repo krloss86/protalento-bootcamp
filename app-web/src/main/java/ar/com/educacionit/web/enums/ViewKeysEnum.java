@@ -11,7 +11,9 @@ public enum ViewKeysEnum implements Enumerable {
 	UPLOAD_PREVIEW_KEY("upload_preview_key"), 
 	ARTICULOS_FAILS("articulos_fails"),
 	ARTICULOS_OKS("articulos_oks"), 
-	FORMATO("formato")
+	FORMATO("formato"), 
+	LISTADO("listado"), 
+	CLAVE_BUSQUEDA("clave_busqueda"),
 	;
 	
 	private final String param;

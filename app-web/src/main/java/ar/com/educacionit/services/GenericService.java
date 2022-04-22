@@ -15,4 +15,6 @@ public interface GenericService<T> {
 	public void update(T entity) throws ServiceException;
 	
 	public List<T> findAll() throws ServiceException;
+	
+	public List<T> findAllBy(String criteria) throws ServiceException; 
 }

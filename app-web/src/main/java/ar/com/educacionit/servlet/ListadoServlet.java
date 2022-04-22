@@ -13,6 +13,7 @@ import ar.com.educacionit.domain.Articulos;
 import ar.com.educacionit.services.ArticulosServices;
 import ar.com.educacionit.services.exceptions.ServiceException;
 import ar.com.educacionit.services.impl.ArticulosServicesImpl;
+import ar.com.educacionit.web.enums.ViewKeysEnum;
 
 /**
  * los servlet no tienen el metodo main, porque no son de tipo
@@ -40,7 +41,7 @@ public class ListadoServlet extends HttpServlet {
 			
 			//guardar el listado en un lugar llamado "request"
 			
-			request.setAttribute("LISTADO", articulos);
+			request.setAttribute(ViewKeysEnum.LISTADO.getParam(), articulos);
 			
 			//AHORA "anda" a la otra pagina y pasale la lista de artiuclos
 			
