@@ -45,7 +45,13 @@ public class BuscarProductosServlet extends HttpServlet {
 			}*/
 			List<Articulos> listado = service.findAllBy(claveBusqueda);
 			
+			//calculo el total
+			Double total = listado.stream()
+				.map(x -> x.getPrecio())
+				.reduce(0d,(x,y) -> x+y);
 			req.getSession().setAttribute(ViewKeysEnum.LISTADO.getParam(), listado);
+			req.getSession().setAttribute(ViewKeysEnum.TOTAL.getParam(), total);
+			
 			getServletContext().getRequestDispatcher(ViewEnums.LISTADO_GENERAL.getParam()).forward(req, resp);
 		} catch (ServiceException e) {
 			List<Articulos> listado = new ArrayList<>();

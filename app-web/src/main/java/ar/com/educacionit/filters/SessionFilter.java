@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import ar.com.educacionit.domain.Users;
 import ar.com.educacionit.web.enums.ViewKeysEnum;
 
-@WebFilter(filterName = "/SessionFilter", urlPatterns = "/controllers/*")
+//@WebFilter(filterName = "/SessionFilter", urlPatterns = "/controllers/*")
 public class SessionFilter implements Filter{
 
 	@Override
