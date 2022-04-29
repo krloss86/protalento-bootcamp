@@ -46,10 +46,22 @@ public abstract class JdbcDaoBase<T extends Entity> implements GenericDao<T>{
 		
 		String sql  = "SELECT * FROM " + this.tabla+ " WHERE ID = " + id;
 		
-		List<T> list = this.findBySQL(sql);
-		
-		if(!list.isEmpty()) {
-			entity = list.get(0);
+		//connection
+		try (Connection con = AdministradorDeConexiones.obtenerConexion();) {
+
+			try (Statement st = con.createStatement()) {
+				
+				try (ResultSet res = st.executeQuery(sql)) {
+					
+					List<T> list = DTOUtils.populateDTOs(this.clazz, res);
+					
+					if(!list.isEmpty()) {
+						entity = list.get(0);
+					}
+				}
+			}
+		}catch (Exception e) {			
+			throw new GenericException("No se pudo consultar:" +sql, e);
 		}
 		
 		return entity;

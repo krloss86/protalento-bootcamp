@@ -5,6 +5,48 @@
 <html lang="es">
 <head>
 	<jsp:include page="styles.jsp"/>
+	<script type="text/javascript">
+		async function editar(id) {
+			const options = {
+			  keyboard: false
+			};
+			
+			//simulo que tengo el json de http://sito.com.ar/api/v1/articulo?id=1
+			/*
+			const articuloJson = {
+			 id:id,
+			 titulo:"titulo1",
+			 fechaCreacion: new Date(),
+			 codigo: 'tit000',
+			 precio: 1500,
+			 marca: {
+				id:1,
+				marca: 'nike'
+			 }
+			};
+			*/
+			//hace la peticion asincrona (ajax) 
+			let articuloJson = await axios.get(`<%=request.getContextPath()%>/rest/ProductoRest?id=${id}`);
+
+			articuloJson = articuloJson.data;
+			
+			//tomo el input con id='id' y actualizo su valor con articuloJson.id
+			document.getElementById('idArticulo').value = articuloJson.id;
+			document.getElementById('id').innerHTML = articuloJson.id;
+			document.getElementById('titulo').value = articuloJson.titulo;
+			document.getElementById('precio').value = articuloJson.precio;
+			
+			const myModal = new bootstrap.Modal(document.getElementById('modalActualizarArticulo'), options)
+			myModal.show();
+			//usar libreria de axios para pedir informacion al servidor
+			
+			// voy a obtener el json que retorna
+			
+			//actualizar el form que está en el modal
+			
+			//tomando los atributos del json y 
+		}
+	</script>
 </head>
 <body>
 	<%--incluyo la seccion navbar --%>
@@ -60,7 +102,11 @@
 									onclick="guardarId(<%=aux.getId()%>)">
 								  Eliminar
 								</button>
-								<a class="btn btn-primary" role="button">Editar</a>
+								<a class="btn btn-primary" 
+									role="button"
+									onclick="editar(<%=aux.getId()%>)" 
+									>Editar
+								</a>
 						      </td>
 						    </tr>
 					   	<%} %>				    
@@ -100,8 +146,60 @@
 		    </div>
 		  </div>
 		</div>
+		
+		<!-- Modal para actualizar articulo-->
+		<div class="modal fade" id="modalActualizarArticulo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+	      	<form id="eliminarForm" action="<%=request.getContextPath()%>/controllers/EditarProductoServlet" method="POST">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalLabel">Actualizar Articulo</h5>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body">
+	    				<div class="mb-3">
+					    <label for="id" 
+					    	class="form-label">ID</label>
+					    <%--
+					    <input type="text"
+					    	name="id" 
+					    	class="form-control" 
+				    		id="id" 
+				    		disabled="disabled"
+				    		aria-describedby="emailHelp">
+				    	--%>
+				    	<input name="id" id="idArticulo" type="hidden">
+				    	<span id="id"></span>
+					  </div>
+					  <div class="mb-3">
+					    <label for="titulo" 
+					    	class="form-label">Título</label>
+					    <input type="text" 
+					    	name="titulo" 
+					    	class="form-control" 
+				    		id="titulo" 
+				    		aria-describedby="emailHelp">
+					  </div>
+					  <div class="mb-3">
+					    <label for="precio" 
+					    	class="form-label">Precio</label>
+					    <input type="number" 
+					    	name="precio" 
+					    	class="form-control" 
+					    	id="precio">
+					  </div>
+	<!-- 				  <button type="submit" class="btn btn-primary">Actualizar</button> -->
+			      </div>
+			      <div class="modal-footer">
+		      		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+			        <button type="submit" class="btn btn-primary">Confirmar</button>
+			      </div>
+			    </div>
+			</form>
+		  </div>
+		</div>
 	</main>
 	<jsp:include page="scripts.jsp"/>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/listado-general.js"></script>
-</body>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script></body>
 </html>
