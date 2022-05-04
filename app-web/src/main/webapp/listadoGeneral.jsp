@@ -30,11 +30,19 @@
 
 			articuloJson = articuloJson.data;
 			
+			const articulo = articuloJson.articulo;
+			
 			//tomo el input con id='id' y actualizo su valor con articuloJson.id
-			document.getElementById('idArticulo').value = articuloJson.id;
-			document.getElementById('id').innerHTML = articuloJson.id;
-			document.getElementById('titulo').value = articuloJson.titulo;
-			document.getElementById('precio').value = articuloJson.precio;
+			document.getElementById('idArticulo').value = articulo.id;
+			document.getElementById('id').innerHTML = articulo.id;
+			document.getElementById('titulo').value = articulo.titulo;
+			document.getElementById('precio').value = articulo.precio;
+			
+			const categorias = articuloJson.categorias;
+			llenarSelect('categorias',categorias, articulo.categoria.id);
+						
+			const marcas = articuloJson.marcas;
+			llenarSelect('marcas',marcas,articulo.marca.id);
 			
 			const myModal = new bootstrap.Modal(document.getElementById('modalActualizarArticulo'), options)
 			myModal.show();
@@ -45,6 +53,26 @@
 			//actualizar el form que está en el modal
 			
 			//tomando los atributos del json y 
+		}
+		
+		function llenarSelect(id,lista,idSelected) {
+			//tomar el select por su id
+			const select = document.getElementById(id);
+			const currentList = select.getElementsByTagName('option');
+			if(currentList.length > 0) {
+				for(const opcion of currentList) {
+					opcion.selected = +opcion.value === idSelected;
+				}
+				return;
+			}
+			//<option selected>Open this select menu</option>
+			for(const obj of lista) {
+				const opcion = document.createElement('option');
+				opcion.value = obj.id;
+				opcion.text = obj.descripcion;				
+				opcion.selected = obj.id === idSelected;
+				select.appendChild(opcion);
+			}
 		}
 	</script>
 </head>
@@ -188,7 +216,28 @@
 					    	class="form-control" 
 					    	id="precio">
 					  </div>
-	<!-- 				  <button type="submit" class="btn btn-primary">Actualizar</button> -->
+					  <div class="mb-3">
+						<!-- MARCAS -->
+						<label for="marcas" 
+					    	class="form-label">Marca</label>
+						<select id="marcas" 
+							class="form-select"
+							name="marcas" 
+							aria-label="">						  
+						</select>
+					  </div>
+					  <!-- CATEGORIAS -->
+					  <div class="mb-3">
+						<!-- MARCAS -->
+						<label for="categorias" 
+					    	class="form-label">Categorias</label>
+						<select id="categorias" 
+							class="form-select"
+							name="categorias" 
+							aria-label="">						  
+						</select>
+					  </div>
+	<!-- 				<button type="submit" class="btn btn-primary">Actualizar</button> -->
 			      </div>
 			      <div class="modal-footer">
 		      		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

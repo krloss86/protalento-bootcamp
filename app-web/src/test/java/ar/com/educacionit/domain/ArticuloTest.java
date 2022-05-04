@@ -6,7 +6,7 @@ public class ArticuloTest {
 
 	public static void main(String[] args) {
 		//assert
-		Articulos miArticulo = new Articulos("titulo1", new Date(), "0001", 2500.0D, 5L, 1L, 1L);
+		Articulos miArticulo = new Articulos("titulo1", "0001", 2500.0D, 5L, 1L, 1L);
 		
 		//f3
 		//alt <-

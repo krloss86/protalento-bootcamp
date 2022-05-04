@@ -31,6 +31,8 @@ public class EditarProductoServlet extends BaseServlet {
 		//datos a actualizar
 		String titulo = req.getParameter("titulo");
 		String precio = req.getParameter("precio");
+		String marca = req.getParameter("marcas");
+		String categoria = req.getParameter("categorias");
 		
 		Collection<Articulos> artInSession = (Collection<Articulos>)req.getSession().getAttribute(ViewKeysEnum.LISTADO.getParam());
 		ViewEnums target = ViewEnums.LISTADO_GENERAL;
@@ -40,16 +42,16 @@ public class EditarProductoServlet extends BaseServlet {
 			
 			art.setTitulo(titulo);
 			art.setPrecio(Double.parseDouble(precio));
+			art.setCategoriasId(Long.parseLong(categoria));
+			art.setMarcasId(Long.parseLong(marca));
 			
 			this.service.update(art);
 			
 			//viejo articulo en sesion
-			List<Articulos> list = artInSession.stream()
+			artInSession = artInSession.stream()
 					.filter(x -> !x.getId().equals(art.getId()))
 					.collect(Collectors.toList());
-			list.add(art);
-			
-			getServletContext().getRequestDispatcher(ViewEnums.LISTADO_GENERAL.getParam()).forward(req, resp);			
+			artInSession.add(art);
 		} catch (ServiceException e) {
 			super.addAttribute(req, ViewKeysEnum.ERROR_GENERAL, e.getMessage());
 		} finally {

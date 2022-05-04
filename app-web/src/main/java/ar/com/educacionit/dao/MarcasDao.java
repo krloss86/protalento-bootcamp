@@ -1,5 +1,7 @@
 package ar.com.educacionit.dao;
 
-public interface MarcasDao {
+import ar.com.educacionit.domain.Marcas;
+
+public interface MarcasDao extends GenericDao<Marcas>{
 
 }

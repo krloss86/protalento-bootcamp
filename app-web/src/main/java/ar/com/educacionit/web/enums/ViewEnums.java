@@ -9,7 +9,8 @@ public enum ViewEnums implements Enumerable{
 	UPLOAD_PREVIEW("/preview.jsp"), 
 	UPLOAD("/upload.jsp"), 
 	RESULTADO_PREVIEW("/resultadoPreview.jsp"), 
-	LISTADO_GENERAL("/listadoGeneral.jsp");
+	LISTADO_GENERAL("/listadoGeneral.jsp"), 
+	NUEVO("/nuevo.jsp");
 	
 	private String view;
 	

@@ -188,12 +188,13 @@ public abstract class JdbcDaoBase<T extends Entity> implements GenericDao<T>{
 	
 	public List<T> findAll() throws GenericException {
 		
-		int limit = 1;
-		int offset = 0;
+		//int limit = 1;
+		//int offset = 0;
 		
 		List<T> list = new ArrayList<>();
 		
-		String sql = "SELECT * FROM " + this.tabla + " LIMIT " + limit + " offset " + offset;
+		//String sql = "SELECT * FROM " + this.tabla + " LIMIT " + limit + " offset " + offset;
+		String sql = "SELECT * FROM " + this.tabla;
 		
 		//connection
 		try (Connection con = AdministradorDeConexiones.obtenerConexion();) {

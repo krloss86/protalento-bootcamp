@@ -16,7 +16,9 @@ public enum ViewKeysEnum implements Enumerable {
 	LISTADO("listado"), 
 	CLAVE_BUSQUEDA("clave_busqueda"), 
 	TOTAL("total"), 
-	ID_PRODUCTO("id"),
+	ID_PRODUCTO("id"), 
+	MARCAS("marcas"),
+	CATEGORIAS("categorias")
 	;
 	
 	private final String param;

@@ -18,7 +18,7 @@
 			          <a class="nav-link" href="${pageContext.request.contextPath}/upload.jsp">Cargar Archivo</a>
 			        </li>
 			        <li class="nav-item">
-			          <a class="nav-link" href="#">Nuevo Producto</a>
+			          <a class="nav-link" href="${pageContext.request.contextPath}/controllers/NuevoProductoServlet">Nuevo Producto</a>
 			        </li>
 		        <% } %>
 					<li class="nav-item">

@@ -16,10 +16,10 @@ public class Articulos implements Entity{
 	private Categorias categoria;
 	
 	//hacia la db
-	public Articulos(String titulo, Date fechaCreacion, String codigo, Double precio, Long stock, Long marcaId,
+	public Articulos(String titulo, String codigo, Double precio, Long stock, Long marcaId,
 			Long categoriaId) {
 		this.titulo = titulo;
-		this.fechaCreacion = fechaCreacion;
+		this.fechaCreacion = new Date();
 		this.codigo = codigo;
 		this.precio = precio;
 		this.stock = stock;
