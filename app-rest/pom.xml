@@ -48,11 +48,13 @@
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-json-binding</artifactId>
         </dependency>
+        <!-- 
         <dependency>
 			<groupId>protalento-bootcamp</groupId>
 			<artifactId>app-service</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		-->
     </dependencies>
 
 	<build>
