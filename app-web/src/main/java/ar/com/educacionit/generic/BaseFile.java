@@ -1,6 +1,6 @@
 package ar.com.educacionit.generic;
 
-import javax.servlet.http.Part;
+import jakarta.servlet.http.Part;
 
 public abstract class BaseFile {
 

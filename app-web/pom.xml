@@ -11,24 +11,11 @@
   
   <!-- AGREGAR  -->
   <dependencies>
-	<!-- https://mvnrepository.com/artifact|/mysql/mysql-connector-java -->
-	<dependency>
-	    <groupId>mysql</groupId>
-	    <artifactId>mysql-connector-java</artifactId>
-	    <version>8.0.28</version>
-	</dependency>
-	<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
-	<dependency>
-		<groupId>org.postgresql</groupId>
-		<artifactId>postgresql</artifactId>
-		<version>42.2.23</version>
-	</dependency>
 	<dependency>
 		<groupId>protalento-bootcamp</groupId>
-		<artifactId>app-domain</artifactId>
+		<artifactId>app-service</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</dependency>
-	
 	<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
 	<dependency>
 	    <groupId>org.apache.poi</groupId>
@@ -39,27 +26,34 @@
 	<!-- librerias -->
 	<!-- jsp/servlet -->
 	<!-- https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api -->
-	<dependency>
-		<groupId>javax.servlet.jsp</groupId>
-		<artifactId>javax.servlet.jsp-api</artifactId>
-		<version>2.3.3</version>
-		<scope>provided</scope>
-	</dependency>
-	<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
-	<dependency>
-		<groupId>javax.servlet</groupId>
-		<artifactId>javax.servlet-api</artifactId>
-		<version>4.0.1</version>
-		<scope>provided</scope>
-	</dependency>
-	
-	<!-- https://github.com/patrickfav/bcrypt/tree/master -->
-	<dependency>
-		<groupId>at.favre.lib</groupId>
-		<artifactId>bcrypt</artifactId>
-		<version>0.9.0</version>
-	</dependency>
-	
+<!-- 	<dependency> -->
+<!-- 		<groupId>javax.servlet.jsp</groupId> -->
+<!-- 		<artifactId>javax.servlet.jsp-api</artifactId> -->
+<!-- 		<version>2.3.3</version> -->
+<!-- 		<scope>provided</scope> -->
+<!-- 	</dependency> -->
+<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>javax.servlet</groupId> -->
+<!-- 		<artifactId>javax.servlet-api</artifactId> -->
+<!-- 		<version>4.0.1</version> -->
+<!-- 		<scope>provided</scope> -->
+<!-- 	</dependency> -->
+<!-- https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api -->
+<dependency>
+    <groupId>jakarta.servlet</groupId>
+    <artifactId>jakarta.servlet-api</artifactId>
+    <version>5.0.0</version>
+    <scope>provided</scope>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/jakarta.servlet.jsp/jakarta.servlet.jsp-api -->
+<dependency>
+    <groupId>jakarta.servlet.jsp</groupId>
+    <artifactId>jakarta.servlet.jsp-api</artifactId>
+    <version>3.0.0</version>
+    <scope>provided</scope>
+</dependency>
 	<dependency>
 	    <groupId>com.fasterxml.jackson.core</groupId>
 	    <artifactId>jackson-databind</artifactId>

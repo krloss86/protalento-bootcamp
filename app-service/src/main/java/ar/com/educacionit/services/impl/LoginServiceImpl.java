@@ -9,8 +9,6 @@ import ar.com.educacionit.domain.Socios;
 import ar.com.educacionit.domain.Users;
 import ar.com.educacionit.services.LoginService;
 import ar.com.educacionit.services.exceptions.ServiceException;
-import ar.com.educacionit.web.enums.ViewEnums;
-import ar.com.educacionit.web.enums.ViewKeysEnum;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 
 public class LoginServiceImpl implements LoginService {
@@ -32,7 +30,7 @@ public class LoginServiceImpl implements LoginService {
 				//valido password
 				BCrypt.Result result = BCrypt.verifyer().verify(passwordFromHtml.getBytes(), users.getPassword().getBytes());				
 				if(!result.verified) {
-					throw new ServiceException(ViewKeysEnum.USUARIO_PASSWORD_INVALIDO.getParam(), null);
+					throw new ServiceException("Usuario/Password incorrectos", null);
 				}
 			
 				Socios socio = this.socioDao.getSociosByUserId(users.getId());

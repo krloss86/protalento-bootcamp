@@ -7,15 +7,14 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.util.Collection;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import ar.com.educacionit.domain.Articulos;
 import ar.com.educacionit.web.enums.ViewEnums;
 import ar.com.educacionit.web.enums.ViewKeysEnum;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/controllers/GenerarArchivoErrorSevlet")
 public class GenerarArchivoErrorSevlet  extends HttpServlet{
@@ -56,10 +55,10 @@ public class GenerarArchivoErrorSevlet  extends HttpServlet{
 			//logica para descargar el archivo y que en navegador
 			//entienda que es un file
 			descargar(fileName, format, outputFile, resp);
+		}else {
+			req.setAttribute(ViewKeysEnum.ERROR_GENERAL.getParam(), "Sin datos...");
+			getServletContext().getRequestDispatcher(ViewEnums.RESULTADO_PREVIEW.getParam()).forward(req, resp);
 		}
-		
-		req.setAttribute(ViewKeysEnum.ERROR_GENERAL.getParam(), "Sin datos...");
-		getServletContext().getRequestDispatcher(ViewEnums.RESULTADO_PREVIEW.getParam()).forward(req, resp);
 	}
 
 	private void descargar(String fileName, String format, File outputFile, HttpServletResponse resp) throws IOException{

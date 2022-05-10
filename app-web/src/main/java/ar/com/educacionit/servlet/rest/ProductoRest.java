@@ -5,12 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ar.com.educacionit.domain.Articulos;
@@ -24,6 +18,11 @@ import ar.com.educacionit.services.impl.ArticulosServicesImpl;
 import ar.com.educacionit.services.impl.CategoriaServiceImpl;
 import ar.com.educacionit.services.impl.MarcasServiceImpl;
 import ar.com.educacionit.web.enums.ViewKeysEnum;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/rest/ProductoRest")
 public class ProductoRest extends HttpServlet{

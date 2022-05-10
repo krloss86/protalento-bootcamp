@@ -9,9 +9,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.servlet.http.Part;
-
 import ar.com.educacionit.domain.Articulos;
+import jakarta.servlet.http.Part;
 
 public class CSVFileParser extends BaseFile implements IParser<Collection<Articulos>>{
 	

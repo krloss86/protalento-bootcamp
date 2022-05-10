@@ -2,12 +2,6 @@ package ar.com.educacionit.servlet;
 
 import java.io.IOException;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ar.com.educacionit.domain.Users;
@@ -16,6 +10,11 @@ import ar.com.educacionit.services.exceptions.ServiceException;
 import ar.com.educacionit.services.impl.LoginServiceImpl;
 import ar.com.educacionit.web.enums.ViewEnums;
 import ar.com.educacionit.web.enums.ViewKeysEnum;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet{
@@ -67,8 +66,8 @@ public class LoginServlet extends HttpServlet{
 	}
 
 	protected boolean isValid(String usernameFromHtml, String passwordFromHtml) {
-		return (usernameFromHtml !=null && !usernameFromHtml.isBlank()) 
+		return (usernameFromHtml !=null && !usernameFromHtml.isEmpty()) 
 				&&
-				(passwordFromHtml !=null && !passwordFromHtml.isBlank());
+				(passwordFromHtml !=null && !passwordFromHtml.isEmpty());
 	}
 }

@@ -1,7 +1,5 @@
 package ar.com.educacionit.domain;
 
-import java.util.Date;
-
 public class ArticuloTest {
 
 	public static void main(String[] args) {
